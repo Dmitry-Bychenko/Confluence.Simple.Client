@@ -11,6 +11,7 @@
     <Description>Confluence Rest Api Client</Description>
     <Copyright>Copyright (c) 2021 by Dmtry Bychenko</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Dmitry-Bychenko/Confluence.Simple.Client</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
