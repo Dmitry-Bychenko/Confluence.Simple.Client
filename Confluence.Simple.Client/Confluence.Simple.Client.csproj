@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Confluence.Simple.Client.snk.pfx</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Dmitry Bychenko</Authors>
+    <Company>Dmitry Bychenko</Company>
+    <Product>Confluence Simple Client</Product>
+    <Description>Confluence Rest Api Client</Description>
+    <Copyright>Copyright (c) 2021 by Dmtry Bychenko</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>
