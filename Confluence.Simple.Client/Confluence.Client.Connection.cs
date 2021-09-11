@@ -5,8 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 
-// https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/
-
 namespace Confluence.Simple.Client {
 
   //-------------------------------------------------------------------------------------------------------------------
@@ -14,10 +12,11 @@ namespace Confluence.Simple.Client {
   /// <summary>
   /// Confluence Connection
   /// </summary>
+  /// <seealso cref="https://docs.atlassian.com/atlassian-confluence/REST/6.6.0/"/>
   //
   //-------------------------------------------------------------------------------------------------------------------
 
-  public sealed class ConfluenceConnection {
+  public sealed class ConfluenceConnection : IEquatable<ConfluenceConnection> {
     #region Private Data
 
     private static readonly CookieContainer s_CookieContainer;
@@ -127,6 +126,37 @@ namespace Confluence.Simple.Client {
     public override string ToString() => $"{Login}@{Server}";
 
     #endregion Public
+
+    #region IEquatable<BitBucketConnection>
+
+    /// <summary>
+    /// Equals 
+    /// </summary>
+    public bool Equals(ConfluenceConnection other) {
+      if (ReferenceEquals(this, other))
+        return true;
+      if (other is null)
+        return false;
+
+      return string.Equals(Login, other.Login) &&
+             string.Equals(Password, other.Password) &&
+             string.Equals(Server, other.Server, StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Equals
+    /// </summary>
+    public override bool Equals(object obj) => obj is ConfluenceConnection other && Equals(other);
+
+    /// <summary>
+    /// Get Hash Code
+    /// </summary>
+    public override int GetHashCode() =>
+      Login.GetHashCode() ^
+      Password.GetHashCode() ^
+      Server.GetHashCode(StringComparison.OrdinalIgnoreCase);
+
+    #endregion IEquatable<BitBucketConnection>
   }
 
 }
