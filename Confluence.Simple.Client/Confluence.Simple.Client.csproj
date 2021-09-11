@@ -9,9 +9,20 @@
     <Company>Dmitry Bychenko</Company>
     <Product>Confluence Simple Client</Product>
     <Description>Confluence Rest Api Client</Description>
-    <Copyright>Copyright (c) 2021 by Dmtry Bychenko</Copyright>
+    <Copyright>Copyright (c) 2021 by Dmitry Bychenko</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Dmitry-Bychenko/Confluence.Simple.Client</RepositoryUrl>
+    <PackageIcon>Confluence.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageProjectUrl>https://github.com/Dmitry-Bychenko/Confluence.Simple.Client</PackageProjectUrl>
+    <PackageReleaseNotes>Simple Confluence Client</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Images\Confluence.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

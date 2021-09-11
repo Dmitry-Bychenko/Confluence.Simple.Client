@@ -210,7 +210,7 @@ namespace Confluence.Simple.Client {
       if (pageSize <= 0)
         pageSize = DefaultPageSize;
 
-      MakeAddress(address);
+      address = MakeAddress(address);
 
       if (address.Contains('?'))
         address += $"&limit={pageSize}";
@@ -219,12 +219,10 @@ namespace Confluence.Simple.Client {
 
       query ??= "{}";
 
-      int start = 0;
-
-      while (start >= 0) {
+      while (address is not null) {
         using var req = new HttpRequestMessage {
           Method = method,
-          RequestUri = new Uri(address + (start == 0 ? "" : $"&start={start}")),
+          RequestUri = new Uri(address),
           Headers = {
           { HttpRequestHeader.Accept.ToString(), "application/json" },
           { HttpRequestHeader.Authorization.ToString(), Connection.Auth},
@@ -243,10 +241,14 @@ namespace Confluence.Simple.Client {
 
         var jsonDocument = await JsonDocument.ParseAsync(stream, default, token).ConfigureAwait(false);
 
-        if (jsonDocument.RootElement.TryGetProperty("nextPageStart", out var prop))
-          start = prop.GetInt32();
-        else
-          start = -1;
+        address = null;
+
+        if (jsonDocument.RootElement.TryGetProperty("_links", out var links))
+          if (links.TryGetProperty("next", out var next)) {
+            address = next.GetString().Trim(' ', '/');
+
+            address = string.Join("/", Connection.Server.TrimEnd('/'), address);
+          }
 
         yield return jsonDocument;
       }
