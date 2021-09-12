@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Confluence.Simple.Client {
 
@@ -22,6 +23,8 @@ namespace Confluence.Simple.Client {
     private static readonly CookieContainer s_CookieContainer;
 
     private static readonly HttpClient s_HttpClient;
+
+    internal bool m_IsConnected;
 
     #endregion Private Data
 
@@ -96,6 +99,11 @@ namespace Confluence.Simple.Client {
     public static HttpClient Client => s_HttpClient;
 
     /// <summary>
+    /// Is Connected
+    /// </summary>
+    public bool IsConnected => m_IsConnected;
+
+    /// <summary>
     /// Login
     /// </summary>
     public string Login { get; }
@@ -114,6 +122,29 @@ namespace Confluence.Simple.Client {
     /// Server
     /// </summary>
     public string Server { get; }
+
+    /// <summary>
+    /// Connect Async
+    /// </summary>
+    public async Task ConnectAsync(CancellationToken token) {
+      if (m_IsConnected)
+        return;
+
+      token.ThrowIfCancellationRequested();
+
+      var q = CreateQuery();
+
+      q.DefaultPageSize = 1;
+
+      using var doc = await q.QueryAsync("user/current", token).ConfigureAwait(false);
+
+      m_IsConnected = true;
+    }
+
+    /// <summary>
+    /// Connect Async
+    /// </summary>
+    public async Task ConnectAsync() => await ConnectAsync(CancellationToken.None);
 
     /// <summary>
     /// Create Query

@@ -141,6 +141,8 @@ namespace Confluence.Simple.Client {
         throw new DataException(message);
       }
 
+      Connection.m_IsConnected = true;
+
       using Stream stream = await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
 
       return await JsonDocument.ParseAsync(stream, default, token).ConfigureAwait(false);
@@ -236,6 +238,8 @@ namespace Confluence.Simple.Client {
           throw new DataException(string.IsNullOrEmpty(response.ReasonPhrase)
             ? $"Query failed with {response.StatusCode} ({(int)response.StatusCode}) code"
             : response.ReasonPhrase);
+
+        Connection.m_IsConnected = true;
 
         using Stream stream = await response.Content.ReadAsStreamAsync(token).ConfigureAwait(false);
 

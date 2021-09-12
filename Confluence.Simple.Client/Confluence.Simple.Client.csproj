@@ -15,7 +15,8 @@
     <PackageIcon>Confluence.png</PackageIcon>
     <PackageIconUrl />
     <PackageProjectUrl>https://github.com/Dmitry-Bychenko/Confluence.Simple.Client</PackageProjectUrl>
-    <PackageReleaseNotes>Simple Confluence Client</PackageReleaseNotes>
+    <PackageReleaseNotes>Explicit Connect (can be omitted)</PackageReleaseNotes>
+    <Version>1.0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
