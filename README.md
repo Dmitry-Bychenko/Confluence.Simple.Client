@@ -1,5 +1,7 @@
 # Confluence.Simple.Client
 
+[![NuGet version (Confluence.Simple.Client)](https://img.shields.io/nuget/v/Confluence.Simple.Client.svg?style=flat-square)](https://www.nuget.org/packages/Confluence.Simple.Client/)
+
 ```c#
 
 ConfluenceConnection conn = new ConfluenceConnection(
